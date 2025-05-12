@@ -1,11 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { ProductsModule } from './products/products.module';
+import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    ProductsModule,
+    AppModule,
     {
+      logger: ['error', 'warn', 'log', 'debug', 'verbose'],
+
       transport: Transport.NATS,
       options: { servers: ['nats://localhost:4222'] },
     },

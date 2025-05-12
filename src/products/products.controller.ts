@@ -8,28 +8,28 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @MessagePattern('createProduct')
+  @MessagePattern('create_products')
   create(@Payload() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
 
-  @MessagePattern('findAllProducts')
+  @MessagePattern('list_products')
   findAll() {
     return this.productsService.findAll();
   }
 
-  @MessagePattern('findOneProduct')
-  findOne(@Payload() id: number) {
+  @MessagePattern('list_products_id')
+  findOne(@Payload() id: any) {
     return this.productsService.findOne(id);
   }
 
-  @MessagePattern('updateProduct')
+  @MessagePattern('update_product')
   update(@Payload() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(updateProductDto.id, updateProductDto);
+    return this.productsService.update(updateProductDto);
   }
 
-  @MessagePattern('removeProduct')
-  remove(@Payload() id: number) {
+  @MessagePattern('delete_product')
+  remove(@Payload() id: any) {
     return this.productsService.remove(id);
   }
 }
